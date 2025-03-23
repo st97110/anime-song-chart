@@ -32,12 +32,16 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            table-layout: fixed; /* ✅ 固定欄位大小 */
         }
         th, td {
             padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            width: 20%;
+            text-align: center; /* ✅ 讓內容居中 */
+            border: 1px solid #ddd; /* ✅ 加上邊框，確保大小統一 */
+            width: 20%; /* ✅ 確保欄位平均分配 */
+            height: auto; /* ✅ 讓高度根據內容調整 */
+            word-wrap: break-word; /* ✅ 讓長文字自動換行 */
+            white-space: normal; /* ✅ 允許換行 */
         }
         th {
             background-color: #9c27b0;
