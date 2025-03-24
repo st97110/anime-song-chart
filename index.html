@@ -12,24 +12,15 @@
             }
 
             table {
-                display: block;
                 overflow-x: auto; /* ✅ 讓手機可滑動表格 */
-                width: 100%;
-                table-layout: auto; /* ✅ 讓欄位大小可調整 */
+                width: 100%; /* ✅ 確保表格不超出容器 */
+                table-layout: fixed; /* ✅ 讓欄位大小統一，避免變形 */
             }
 
             th, td {
-                padding: 6px; /* ✅ 減小內距，避免佔用過多空間 */
+                padding: 6px; /* ✅ 再縮小一點內距，避免表格過大 */
                 font-size: 12px; /* ✅ 手機上使用較小字體，提升可讀性 */
-                white-space: nowrap; /* ✅ 避免換行，確保欄位不會變形 */
-            }
-        }
-        @media (max-width: 768px) {
-            .year-cell {
-                position: sticky;
-                left: 0;
-                background: #fff; /* ✅ 確保背景不會變透明 */
-                z-index: 10;
+                white-space: normal; /* ✅ 允許文字換行，避免超出螢幕 */
             }
         }
 
@@ -72,6 +63,8 @@
             height: auto; /* ✅ 讓高度根據內容調整 */
             word-wrap: break-word; /* ✅ 讓長文字自動換行 */
             white-space: normal; /* ✅ 允許換行 */
+            position: relative; /* ✅ 新增：為了放置圈圈 */
+            cursor: pointer; /* ✅ 新增：讓使用者知道可以點擊 */
         }
         th {
             background-color: #9c27b0;
@@ -89,7 +82,44 @@
         a:hover {
             text-decoration: underline;
         }
+        
+        /* ✅ 新增：圈圈樣式 */
+        .circle-mark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid red;
+            border-radius: 50%;
+            box-sizing: border-box;
+            pointer-events: none; /* 防止圈圈影響點擊 */
+        }
     </style>
+    
+    <!-- ✅ 新增：JavaScript 處理點擊事件 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 獲取所有表格單元格
+            const cells = document.querySelectorAll('td');
+            
+            // 為每個單元格添加點擊事件
+            cells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    // 檢查是否已經有圈圈
+                    if (this.querySelector('.circle-mark')) {
+                        // 如果有圈圈，移除它
+                        this.querySelector('.circle-mark').remove();
+                    } else {
+                        // 如果沒有圈圈，添加一個
+                        const circle = document.createElement('div');
+                        circle.className = 'circle-mark';
+                        this.appendChild(circle);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <h1>アニソン世代別ビンゴ</h1>
