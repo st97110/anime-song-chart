@@ -12,15 +12,24 @@
             }
 
             table {
+                display: block;
                 overflow-x: auto; /* ✅ 讓手機可滑動表格 */
-                width: 100%; /* ✅ 確保表格不超出容器 */
-                table-layout: fixed; /* ✅ 讓欄位大小統一，避免變形 */
+                width: 100%;
+                table-layout: auto; /* ✅ 讓欄位大小可調整 */
             }
 
             th, td {
-                padding: 6px; /* ✅ 再縮小一點內距，避免表格過大 */
+                padding: 6px; /* ✅ 減小內距，避免佔用過多空間 */
                 font-size: 12px; /* ✅ 手機上使用較小字體，提升可讀性 */
-                white-space: normal; /* ✅ 允許文字換行，避免超出螢幕 */
+                white-space: nowrap; /* ✅ 避免換行，確保欄位不會變形 */
+            }
+        }
+        @media (max-width: 768px) {
+            .year-cell {
+                position: sticky;
+                left: 0;
+                background: #fff; /* ✅ 確保背景不會變透明 */
+                z-index: 10;
             }
         }
 
