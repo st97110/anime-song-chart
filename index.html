@@ -22,6 +22,12 @@
                 font-size: 12px; /* ✅ 手機上使用較小字體，提升可讀性 */
                 white-space: normal; /* ✅ 允許文字換行，避免超出螢幕 */
             }
+            
+            /* 播放器在手機上的樣式 */
+            #player-container {
+                width: 100%;
+                height: 200px;
+            }
         }
 
         body {
@@ -95,282 +101,464 @@
             box-sizing: border-box;
             pointer-events: none; /* 防止圈圈影響點擊 */
         }
+
+        /* YouTube播放器容器樣式 */
+        #player-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 180px;
+            background-color: #000;
+            z-index: 1000;
+            box-shadow: -2px -2px 10px rgba(0,0,0,0.2);
+            border-top-left-radius: 5px;
+            display: none;
+        }
+        
+        /* 播放器控制按鈕 */
+        #player-controls {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background-color: #9c27b0;
+            padding: 5px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        #close-player {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 2px 8px;
+        }
+        
+        /* 當前播放的歌曲信息 */
+        #now-playing {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            background-color: rgba(156, 39, 176, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-top-left-radius: 5px;
+            font-size: 12px;
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* 音頻播放模式切換 */
+        #audio-mode {
+            position: absolute;
+            top: -30px;
+            left: 210px;
+            background-color: #9c27b0;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
     </style>
+</head>
+<body>
+    <div class="container">
+        <h1>アニソン世代別ビンゴ</h1>
+        <table>
+            <tr>
+                <td class="year-cell">2006</td>
+                <td><a href="#" data-youtube-id="WWB01IuMvzA" title="涼宮春日の憂鬱">God knows...</a></td>
+                <td><a href="#" data-youtube-id="OYVlx3vnu8I" title="涼宮春日の憂鬱">ハレ晴レユカイ</a></td>
+                <td><a href="#" data-youtube-id="FUH9S44D1BM" title="Code Geass 反逆のルルーシュ">COLORS</a></td>
+                <td><a href="#" data-youtube-id="ealvplgBdrI" title="BLACK LAGOON">Red fraction</a></td>
+                <td><a href="#" data-youtube-id="Lq2-HHP04jM" title="時をかける少女">変わらないもの</a></td>
+                <td><a href="#" data-youtube-id="rHwOE8R-gMA" title="銀魂">Pray</a></td>
+                <td><a href="#" data-youtube-id="8hhKoCm0H90" title="ひぐらしのなく頃に">ひぐらしのなく頃に</a></td>
+                <td><a href="#" data-youtube-id="2RBazTfpybw" title="DEATH NOTE">the WORLD</a></td>
+                <td><a href="#" data-youtube-id="jYTegDjxJZs" title="うたわれるもの">夢想花</a></td>
+                <td><a href="#" data-youtube-id="AeMRXJtg500" title="映画ドラえもん のび太の恐竜2006">ボクノート</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2007</td>
+                <td><a href="#" data-youtube-id="5EXFilTUiko" title="天元突破グレンラガン">空色デイズ</a></td>
+                <td><a href="#" data-youtube-id="aTvexNLRwHw" title="ぼくらの">アンインストール</a></td>
+                <td><a href="#" data-youtube-id="73O7tATQ8og" title="らき☆すた">もってけ！セーラーふく</a></td>
+                <td><a href="#" data-youtube-id="kAImtagQL_I" title="CLANNAD">だんご大家族</a></td>
+                <td><a href="#" data-youtube-id="kBQmuw3CYnE" title="銀魂">修羅</a></td>
+                <td><a href="#" data-youtube-id="_F5459jCtuM" title="BACCANO！">Guns & Roses</a></td>
+                <td><a href="#" data-youtube-id="t5IFVfJwCWo" title="CODE GEASS 反逆のルルーシュ">モザイクカケラ</a></td>
+                <td><a href="#" data-youtube-id="Uti77M_FG4Q" title="CLANNAD">メグメル</a></td>
+                <td><a href="#" data-youtube-id="GAVYCSXAlv0" title="ひぐらしのなく頃に">奈落の底</a></td>
+                <td><a href="#" data-youtube-id="Uo5rQnLLoPw" title="ef - a tale of memories">euphoric field</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2008</td>
+                <td><a href="#" data-youtube-id="E3wWC6Cfikg" title="CLANNAD AFTER STORY">時を刻む唄</a></td>
+                <td><a href="#" data-youtube-id="n5TG3Fxzft0" title="銀魂">曇天</a></td>
+                <td><a href="#" data-youtube-id="XPsmi_wbsRs" title="マクロスF">ライオン</a></td>
+                <td><a href="#" data-youtube-id="pQ_RaakS6Lc" title="NARUTO -ナルト- 疾風伝">ブルーバード</a></td>
+                <td><a href="#" data-youtube-id="tjb0nBaO52o" title="ef - a tale of melodies">ebullient future</a></td>
+                <td><a href="#" data-youtube-id="nAi8JIvzcMY" title="CODE GEASS 反逆のルルーシュR2">O2</a></td>
+                <td><a href="#" data-youtube-id="-kBmJwloO7Q" title="喰霊">Paradise Lost</a></td>
+                <td><a href="#" data-youtube-id="7YlDQpHXZPk" title="true tears">リブラクァイア</a></td>
+                <td><a href="#" data-youtube-id="JwnGaYtQnjU" title="とある魔術の禁書目録">PSI-missing</a></td>
+                <td><a href="#" data-youtube-id="fazGZtQ5GJg" title="マクロスF">ノーザンクロス</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2009</td>
+                <td><a href="#" data-youtube-id="caF6nJxTejc" title="化物語">君の知らない物語</a></td>
+                <td><a href="#" data-youtube-id="q_sQUK418mM" title="とある科学の超電磁砲">only my railgun</a></td>
+                <td><a href="#" data-youtube-id="uKxyLmbOc0Q" title="化物語">恋愛サーキュレーション</a></td>
+                <td><a href="#" data-youtube-id="5CSNv9MNEC4" title="K-ON!">Don't say "lazy"</a></td>
+                <td><a href="#" data-youtube-id="2gcH3DTeVf0" title="獣の奏者エリン">雫</a></td>
+                <td><a href="#" data-youtube-id="s2bECQLBPdg" title="とらドラ！">オレンジ</a></td>
+                <td><a href="#" data-youtube-id="I0xRbWqIohQ" title="K-ON!">ふわふわ時間</a></td>
+                <td><a href="#" data-youtube-id="ePVJdev77Gw" title="WHITE ALBUM">深愛</a></td>
+                <td><a href="#" data-youtube-id="B7uMdmCQabc" title="鋼の錬金術師 BROTHERHOOD">again</a></td>
+                <td><a href="#" data-youtube-id="ua02dloykJ4" title="けいおん！">Cagayake! GIRLS</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2010</td>
+                <td><a href="#" data-youtube-id="tm7Xf9818FM" title="Angel Beats!">一番の宝物</a></td>
+                <td><a href="#" data-youtube-id="dUrohpo5BJs" title="緣之空">比翼の羽根</a></td>
+                <td><a href="#" data-youtube-id="ba0juE9ROCg" title="K-ON!!">天使にふれたよ!</a></td>
+                <td><a href="#" data-youtube-id="W4YbIxlfw8k" title="とある科学の超電磁砲">LEVEL5 -judgelight-</a></td>
+                <td><a href="#" data-youtube-id="5r0jdlfqeE4" title="DURARARA!!">裏切りの夕焼け</a></td>
+                <td><a href="#" data-youtube-id="QIU044tsV2Q" title="とある魔術の禁書目録II">No buts!</a></td>
+                <td><a href="#" data-youtube-id="XfjOSXQm5Eo" title="俺の妹がこんなに可愛いわけがない">irony</a></td>
+                <td><a href="#" data-youtube-id="zIFV8UUs1-c" title="Angel Beats!">My Soul, Your Beats!</a></td>
+                <td><a href="#" data-youtube-id="Kecl-SomNwg" title="K-ON!!">GO!GO! MANIAC</a></td>
+                <td><a href="#" data-youtube-id="VXbXgblVh5Y" title="刀語">拍手喝采</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2011</td>
+                <td><a href="#" data-youtube-id="7EuTPTVpuNI" title="魔法少女まどか☆マギカ">コネクト</a></td>
+                <td><a href="#" data-youtube-id="GJ4yehnerHQ" title="Fate/Zero">oath sign</a></td>
+                <td><a href="#" data-youtube-id="KpM6xNAgRoI" title="銀魂">サムライハート</a></td>
+                <td><a href="#" data-youtube-id="nIrYjzHAEp0" title="ギルティクラウン">My Dearest</a></td>
+                <td><a href="#" data-youtube-id="ZGM90Bo3zH0" title="STEINS;GATE">Hacking to the Gate</a></td>
+                <td><a href="#" data-youtube-id="fRQtDjiRtI8" title="あの日見た花の名前を僕達はまだ知らない。">secret base 〜君がくれたもの〜</a></td>
+                <td><a href="#" data-youtube-id="LkpSfuHDMTg" title="銀魂">桃源郷エイリアン</a></td>
+                <td><a href="#" data-youtube-id="Lw5o2pSrVbQ" title="TIGER & BUNNY">オリオンをなぞる</a></td>
+                <td><a href="#" data-youtube-id="pQyjzmB_YeU" title="ギルティクラウン">Departures ~あなたにおくるアイの歌~</a></td>
+                <td><a href="#" data-youtube-id="7tLzZ3H5uJU" title="うたの☆プリンスさまっ♪">マジLOVE1000%</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2012</td>
+                <td><a href="#" data-youtube-id="qiX5DI--8bg" title="PSYCHO-PASS サイコパス">名前のない怪物</a></td>
+                <td><a href="#" data-youtube-id="-p0IjnBhG10" title="ギルティクラウン">The Everlasting Guilty Crown</a></td>
+                <td><a href="#" data-youtube-id="RpqqaNJuopc" title="氷菓">優しさの理由</a></td>
+                <td><a href="#" data-youtube-id="h7Oi2h-vKFI" title="ソードアート・オンライン">crossing field</a></td>
+                <td><a href="#" data-youtube-id="IIwp6Nafry0" title="中二病でも恋がしたい！">Sparkling Daydream</a></td>
+                <td><a href="#" data-youtube-id="Lcb7Za77lfw" title="這いよれ! ニャル子さん">太陽曰く燃えよカオス</a></td>
+                <td><a href="#" data-youtube-id="14FOPsSCIPs" title="偽物語">白金ディスコ</a></td>
+                <td><a href="#" data-youtube-id="2o00UFfyIfQ" title="Little Busters!">Little Busters!</a></td>
+                <td><a href="#" data-youtube-id="cHN2mdIwB8M" title="偽物語">ナイショの話</a></td>
+                <td><a href="#" data-youtube-id="IPMxMR1vAVE" title="BTOOOM!">No pain, No game</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2013</td>
+                <td><a href="#" data-youtube-id="NOt2qxWtBv0" title="とある科学の超電磁砲S">sister's noise</a></td>
+                <td><a href="#" data-youtube-id="qDE4pm6yiHM" title="ソードアート・オンライン">ユキトキ</a></td>
+                <td><a href="#" data-youtube-id="aEHxqBHCkFc" title="這いよれ! ニャル子さん W">恋は渾沌の隷也</a></td>
+                <td><a href="#" data-youtube-id="WPKiiYqp4Vc" title="機巧少女は傷つかない">回レ! 雪月花</a></td>
+                <td><a href="#" data-youtube-id="8RGI7JhWOCs" title="進撃の巨人">紅蓮の弓矢</a></td>
+                <td><a href="#" data-youtube-id="AtFpPAVAy8k" title="たまこまーけっと">カラフル</a></td>
+                <td><a href="#" data-youtube-id="9sEA0jgMzas" title="境界の彼方">境界の彼方</a></td>
+                <td><a href="#" data-youtube-id="Mi9uNu35Gmk" title="映画クレヨンしんちゃん　バカうまっ！B級グルメサバイバル！！">RPG</a></td>
+                <td><a href="#" data-youtube-id="8nr4pKmGsbM" title="ラブライブ！">START:DASH!!</a></td>
+                <td><a href="#" data-youtube-id="D2uqpqrYmMY" title="蒼き鋼のアルペジオ">SAVIOR OF SONG</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2014</td>
+                <td><a href="#" data-youtube-id="FghoeusbkUk" title="ノーゲーム・ノーライフ">This game</a></td>
+                <td><a href="#" data-youtube-id="uMeR2W19wT0" title="東京喰種">unravel</a></td>
+                <td><a href="#" data-youtube-id="dix-lB_muio" title="ラブライブ！">Snow halation</a></td>
+                <td><a href="#" data-youtube-id="QizqLqGLork" title="ソードアート・オンライン">courage</a></td>
+                <td><a href="#" data-youtube-id="SnXkhkEvNIM" title="四月は君の嘘">光るなら</a></td>
+                <td><a href="#" data-youtube-id="IzhMzY5avLI" title="魔法科高校の劣等生">Rising Hope</a></td>
+                <td><a href="#" data-youtube-id="y6FCQWlKeJQ" title="ソードアート・オンライン">シルシ</a></td>
+                <td><a href="#" data-youtube-id="4faD6XrGoVY" title="ご注文はうさぎですか？">Daydream cafe</a></td>
+                <td><a href="#" data-youtube-id="zVgKnfN9i34" title="NARUTO -ナルト- 疾風伝">シルエット</a></td>
+                <td><a href="#" data-youtube-id="i1qrQWyuM3U" title="月刊少女野崎くん">君じゃなきゃダメみたい</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2015</td>
+                <td><a href="#" data-youtube-id="JpCyeo_kNA0" title="血界戦線">シュガーソングとビターステップ</a></td>
+                <td><a href="#" data-youtube-id="qs679fajel0" title="やはり俺の青春ラブコメはまちがっている。続">春擬き</a></td>
+                <td><a href="#" data-youtube-id="EYiNo2kLAHw" title="銀魂°">プライド革命</a></td>
+                <td><a href="#" data-youtube-id="1bC5CNDk_mw" title="ラブライブ！">僕たちはひとつの光</a></td>
+                <td><a href="#" data-youtube-id="XeI8E20ZUE4" title="Fate/stay night [Unlimited Blade Works]">Brave Shine</a></td>
+                <td><a href="#" data-youtube-id="ZGGwnnz0f-I" title="艦隊これくしょん -艦これ-">吹雪</a></td>
+                <td><a href="#" data-youtube-id="C-o8pTi6vd8" title="ノラガミ ARAGOTO">狂乱Hey Kids!!</a></td>
+                <td><a href="#" data-youtube-id="ImafuPUbb30" title="山田くんと7人の魔女">くちづけDiamond</a></td>
+                <td><a href="#" data-youtube-id="acVHCpzUCq8" title="Charlotte">Bravely you</a></td>
+                <td><a href="#" data-youtube-id="VS82jSg05O4" title="艦隊これくしょん -艦これ-">海色</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2016</td>
+                <td><a href="#" data-youtube-id="2ctTxnkRbIo" title="Re:ゼロから始める異世界生活">Redo</a></td>
+                <td><a href="#" data-youtube-id="oRAF2-Exzx4" title="ハイキュー!! セカンドシーズン">ヒカリアレ</a></td>
+                <td><a href="#" data-youtube-id="PDSkFeMVNFs" title="君の名は。">前前前世</a></td>
+                <td><a href="#" data-youtube-id="bN1t3-2X3aM" title="夏目友人帳">茜さす</a></td>
+                <td><a href="#" data-youtube-id="nPJhLiqv8Jc" title="この素晴らしい世界に祝福を！">fantastic dreamer</a></td>
+                <td><a href="#" data-youtube-id="yPWCFWKAgRA" title="はいふり">High Free Spirits</a></td>
+                <td><a href="#" data-youtube-id="Y9JPLPJLrlk" title="暗殺教室第2期">バイバイYESTERDAY</a></td>
+                <td><a href="#" data-youtube-id="-77UEct0cZM" title="僕のヒーローアカデミア">THE DAY</a></td>
+                <td><a href="#" data-youtube-id="Yc8pu8TC7IM" title="Re:ゼロから始める異世界生活">Paradisus-Paradoxum</a></td>
+                <td><a href="#" data-youtube-id="d8wBMkvtRaI" title="僕だけがいない街">Re:Re:</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2017</td>
+                <td><a href="#" data-youtube-id="9aJVr5tTTWk" title="僕のヒーローアカデミア第2期">ピースサイン</a></td>
+                <td><a href="#" data-youtube-id="GC1igLEsa8I" title="劇場版 ソードアート・オンライン -オーディナル・スケール-">Catch the Moment</a></td>
+                <td><a href="#" data-youtube-id="maKok2RItxM" title="小林さんちのメイドラゴン">青空のラプソディ</a></td>
+                <td><a href="#" data-youtube-id="OgXZn_H_QAI" title="幼女戦記">Los! Los! Los!</a></td>
+                <td><a href="#" data-youtube-id="xkMdLcB_vNU" title="けものフレンズ">ようこそジャパリパークへ</a></td>
+                <td><a href="#" data-youtube-id="lOGwN-W1fpM" title="ようこそ実力至上主義の教室へ">カーストルーム</a></td>
+                <td><a href="#" data-youtube-id="PHVteOCVAbk" title="結城友奈は勇者である 鷲尾須美の章">エガオノキミへ</a></td>
+                <td><a href="#" data-youtube-id="fHD4nFHjTOc" title="ラブライブ！サンシャイン!!">WATER BLUE NEW WORLD</a></td>
+                <td><a href="#" data-youtube-id="wrpRv1pyV6I" title="ノーゲーム・ノーライフ ゼロ">THERE IS A REASON</a></td>
+                <td><a href="#" data-youtube-id="gzbPx7Jvd68" title="エロマンガ先生">ヒトリゴト</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2018</td>
+                <td><a href="#" data-youtube-id="MMuAqR_MjS8" title="ソードアート・オンライン アリシゼーション">ADAMAS</a></td>
+                <td><a href="#" data-youtube-id="MbGj3zV3X8I" title="青春ブタ野郎はバニーガール先輩の夢を見ない">君のせい</a></td>
+                <td><a href="#" data-youtube-id="3QvZYI00voE" title="ハッピーシュガーライフ">ワンルームシュガーライフ</a></td>
+                <td><a href="#" data-youtube-id="P1cyCAUTWVg" title="やがて君になる">Love with you</a></td>
+                <td><a href="#" data-youtube-id="XjHqfhOcK_0" title="ヲタクに恋は難しい">フィクション</a></td>
+                <td><a href="#" data-youtube-id="aFe3srrhLdI" title="はたらく細胞">ミッション！健・康・第・イチ</a></td>
+                <td><a href="#" data-youtube-id="WHcHbyUmpL0" title="色づく世界の明日から">17才</a></td>
+                <td><a href="#" data-youtube-id="Pn4zz6ZdEU0" title="ソードアート・オンライン アリシゼーション">Iris(アイリス)</a></td>
+                <td><a href="#" data-youtube-id="b4CIYS1Bme4" title="SSSS.GRIDMAN">UNION</a></td>
+                <td><a href="#" data-youtube-id="_EQ70Yr_2nc" title="殺戮の天使">Pray</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2019</td>
+                <td><a href="#" data-youtube-id="4DxL6IKmXx4" title="鬼滅の刃">紅蓮華</a></td>
+                <td><a href="#" data-youtube-id="wfCcs0vLysk" title="炎炎ノ消防隊">インフェルノ</a></td>
+                <td><a href="#" data-youtube-id="2pECnr5MNuU" title="ダンベル何キロ持てる？">お願いマッスル</a></td>
+                <td><a href="#" data-youtube-id="3KGjAw0fGX0" title="Fate/Grand Order -絶対魔獣戦線バビロニア-">Phantom Joke</a></td>
+                <td><a href="#" data-youtube-id="XtqGr-km0XQ" title="ソードアート・オンライン アリシゼーション">unlasting</a></td>
+                <td><a href="#" data-youtube-id="f0veKLMX1oA" title="五等分の花嫁">五等分の気持ち</a></td>
+                <td><a href="#" data-youtube-id="A8XXGzbs48A" title="可愛ければ変態でも好きになってくれますか？">ダイスキ。</a></td>
+                <td><a href="#" data-youtube-id="Isb7Q4jEA04" title="僕のヒーローアカデミア第4期">ポラリス</a></td>
+                <td><a href="#" data-youtube-id="WvMcbMh3kI0" title="女子高生の無駄づかい">輪！Moon! dass! cry!</a></td>
+                <td><a href="#" data-youtube-id="oXTaVsGY_NI" title="俺を好きなのはお前だけかよ">パパパ</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2020</td>
+                <td><a href="#" data-youtube-id="r-4XumkB2Yg" title="SAO アリシゼーション War of Underworld">ANIMA</a></td>
+                <td><a href="#" data-youtube-id="1tk1pqwrOys" title="呪術廻戦">廻廻奇譚</a></td>
+                <td><a href="#" data-youtube-id="4DxL6IKmXx4" title="鬼滅の刃">炎</a></td>
+                <td><a href="#" data-youtube-id="ta47cixWBp8" title="神様になった日">君という神話</a></td>
+                <td><a href="#" data-youtube-id="R33q3f7Xpiw" title="とある科学の超電磁砲T">final phase</a></td>
+                <td><a href="#" data-youtube-id="j3fczXHUvPQ" title="やはり俺の青春ラブコメはまちがっている。完">芽ぐみの雨</a></td>
+                <td><a href="#" data-youtube-id="uaRnwnmqrws" title="Re:ゼロから始める異世界生活">Realize</a></td>
+                <td><a href="#" data-youtube-id="DzQ7s2KkbCk" title="彼女、お借りします">センチメートル</a></td>
+                <td><a href="#" data-youtube-id="ekP7VLeXnqY" title="Fate/stay night [Heaven's Feel]">春はゆく</a></td>
+                <td><a href="#" data-youtube-id="Ui-KKFZKIq4" title="魔王城でおやすみ">快眠！安眠！スヤリスト生活</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2021</td>
+                <td><a href="#" data-youtube-id="6zQ0myS_o60" title="ウマ娘">ユメヲカケル！</a></td>
+                <td><a href="#" data-youtube-id="XCs7FacjHQY" title="小林さんちのメイドラゴンＳ">愛のシュプリーム!</a></td>
+                <td><a href="#" data-youtube-id="2p8ig-TrYPY" title="ヴィヴィ -フローライトアイズソング-">Sing My Pleasure</a></td>
+                <td><a href="#" data-youtube-id="T9KcagzYZUY" title="劇場版ソードアート・オンライン -プログレッシブ- 星なき夜のアリア">往け</a></td>
+                <td><a href="#" data-youtube-id="AXtfzKaKr4I" title="先輩がうざい後輩の話">アノーイング！さんさんウィーク！</a></td>
+                <td><a href="#" data-youtube-id="O1bhZgkC4Gw" title="東京リベンジャーズ">Cry Baby</a></td>
+                <td><a href="#" data-youtube-id="xfG6L9I7N8I" title="機動戦士ガンダム 閃光のハサウェイ">閃光</a></td>
+                <td><a href="#" data-youtube-id="f_RtcheIvcg" title="takt op.Destiny">タクト</a></td>
+                <td><a href="#" data-youtube-id="M8LwhRkNaSQ" title="シャドーハウス">ないない</a></td>
+                <td><a href="#" data-youtube-id="CL8ihD3rPC4" title="世界最高の暗殺者、異世界貴族に転生する">Dark seeks light</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2022</td>
+                <td><a href="#" data-youtube-id="Rwzy6Qt8gq8" title="リコリス・リコイル">花の塔</a></td>
+                <td><a href="#" data-youtube-id="Yd8kUoB72xU" target="_blank" title="ぼっち・ざ・ろっく！">青春コンプレックス</a></td>
+                <td><a href="#" data-youtube-id="M2cckDmNLMI" target="_blank" title="チェンソーマン">KICK BACK</a></td>
+                <td><a href="#" data-youtube-id="3eytpBOkOFA" target="_blank" title="機動戦士ガンダム水星の魔女">祝福</a></td>
+                <td><a href="#" data-youtube-id="CbH2F0kXgTY" target="_blank" title="SPY×FAMILY">ミックスナッツ</a></td>
+                <td><a href="#" data-youtube-id="1FliVTcX8bQ" target="_blank" title="ONE PIECE FILM RED">新時代</a></td>
+                <td><a href="#" data-youtube-id="NNDS_UyHzvk" target="_blank" title="明日ちゃんのセーラー服">はじまりのセツナ</a></td>
+                <td><a href="#" data-youtube-id="AwXRPWmgLbU" target="_blank" title="よふかしのうた">堕天</a></td>
+                <td><a href="#" data-youtube-id="wSTbdqo-j74" target="_blank" title="ぼっち・ざ・ろっく！">星座になるまで</a></td>
+                <td><a href="#" data-youtube-id="f0veKLMX1oA" target="_blank" title="映画「五等分の花嫁」">五等分の花嫁～ありがとうの花～</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2023</td>
+                <td><a href="#" data-youtube-id="ZRtdQ81jPUQ" target="_blank" title="【推しの子】">アイドル</a></td>
+                <td><a href="#" data-youtube-id="OIBODIPC_8Y" target="_blank" title="葬送のフリーレン">勇者</a></td>
+                <td><a href="#" data-youtube-id="gcgKUcJKxIs" target="_blank" title="呪術廻戦">青のすみか</a></td>
+                <td><a href="#" data-youtube-id="f5Rml_Jol8o" target="_blank" title="転生王女と天才令嬢の魔法革命">アルカンシェル</a></td>
+                <td><a href="#" data-youtube-id="fE9trKOuT3Q" target="_blank" title="無職転生">spiral</a></td>
+                <td><a href="#" data-youtube-id="v-WcMQbXbKY" target="_blank" title="薬屋のひとりごと">花になって</a></td>
+                <td><a href="#" data-youtube-id="0saw1cGIl1A" target="_blank" title="【推しの子】">メフィスト</a></td>
+                <td><a href="#" data-youtube-id="cHcMHceZEuk" target="_blank" title="お兄ちゃんはおしまい！">アイデン貞貞メルトダウン</a></td>
+                <td><a href="#" data-youtube-id="fhzKLBZJC3w" target="_blank" title="呪術廻戦">SPECIALZ</a></td>
+                <td><a href="#" data-youtube-id="hfnZBzuVKX0" target="_blank" title="スキップとローファー">メロウ</a></td>
+            </tr>
+            <tr>
+                <td class="year-cell">2024</td>
+                <td><a href="#" data-youtube-id="8tQiWHXSGN0" target="_blank" title="【推しの子】">ファタール</a></td>
+                <td><a href="#" data-youtube-id="A7cp6OVa0Qc" target="_blank" title="アオのハコ">Same Blue</a></td>
+                <td><a href="#" data-youtube-id="MSmfAa_oSqE" target="_blank" title="ガールズバンドクライ">雑踏、僕らの街</a></td>
+                <td><a href="#" data-youtube-id="A0tKGpKOU4Y" target="_blank" title="僕の心のヤバイやつ第2期">「僕は…」</a></td>
+                <td><a href="#" data-youtube-id="7GJOBkIgWHc" target="_blank" title="負けヒロインが多すぎる">つよがる​ガール</a></td>
+                <td><a href="#" data-youtube-id="QjrkrVmC-8M" target="_blank" title="忘却バッテリー">ライラック</a></td>
+                <td><a href="#" data-youtube-id="tRwHpyOq4P4" target="_blank" title="ダンダダン">オトノケ</a></td>
+                <td><a href="#" data-youtube-id="ZZvIVRQ4E7I" target="_blank" title="しかのこのこのここしたんたん">シカ色デイズ</a></td>
+                <td><a href="#" data-youtube-id="9E_gqQ7V5P0" target="_blank" title="僕のヒーローアカデミア">カーテンコール</a></td>
+                <td><a href="#" data-youtube-id="1ns78jyf0fw" target="_blank" title="響け！ユーフォニアム３">ReCoda</a></td>
+            </tr>
+        </table>
+    </div>
     
-    <!-- ✅ 新增：JavaScript 處理點擊事件 -->
+    <!-- YouTube播放器容器 -->
+    <div id="player-container">
+        <div id="now-playing"></div>
+        <button id="audio-mode" title="僅播放音頻">🎵模式</button>
+        <div id="player-controls">
+            <button id="close-player">✕</button>
+        </div>
+        <div id="player"></div>
+    </div>
+
+    <!-- 載入YouTube API -->
     <script>
+        // 設定全局變數
+        let player;
+        let isAudioOnly = false;
+        
+        // 圈圈標記功能
         document.addEventListener('DOMContentLoaded', function() {
             // 獲取所有表格單元格
             const cells = document.querySelectorAll('td');
             
             // 為每個單元格添加點擊事件
             cells.forEach(cell => {
-                cell.addEventListener('click', function() {
-                    // 檢查是否已經有圈圈
-                    if (this.querySelector('.circle-mark')) {
-                        // 如果有圈圈，移除它
-                        this.querySelector('.circle-mark').remove();
-                    } else {
-                        // 如果沒有圈圈，添加一個
-                        const circle = document.createElement('div');
-                        circle.className = 'circle-mark';
-                        this.appendChild(circle);
+                cell.addEventListener('click', function(e) {
+                    // 檢查點擊是否發生在連結上
+                    if (e.target.tagName !== 'A') {
+                        // 檢查是否已經有圈圈
+                        if (this.querySelector('.circle-mark')) {
+                            // 如果有圈圈，移除它
+                            this.querySelector('.circle-mark').remove();
+                        } else {
+                            // 如果沒有圈圈，添加一個
+                            const circle = document.createElement('div');
+                            circle.className = 'circle-mark';
+                            this.appendChild(circle);
+                        }
                     }
                 });
             });
+            
+            // 為所有歌曲連結添加點擊事件
+            const songLinks = document.querySelectorAll('a[data-youtube-id]');
+            songLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const youtubeId = this.getAttribute('data-youtube-id');
+                    const title = this.getAttribute('title') + ' - ' + this.textContent;
+                    playVideo(youtubeId, title);
+                });
+            });
+            
+            // 關閉播放器按鈕
+            document.getElementById('close-player').addEventListener('click', function() {
+                document.getElementById('player-container').style.display = 'none';
+                if (player) {
+                    player.stopVideo();
+                }
+            });
+            
+            // 音頻/視頻模式切換
+            document.getElementById('audio-mode').addEventListener('click', function() {
+                isAudioOnly = !isAudioOnly;
+                this.textContent = isAudioOnly ? '🎬模式' : '🎵模式';
+                this.title = isAudioOnly ? '顯示視頻' : '僅播放音頻';
+                
+                // 如果播放器已經初始化，調整高度
+                if (player) {
+                    const container = document.getElementById('player-container');
+                    if (isAudioOnly) {
+                        container.style.height = '60px';
+                    } else {
+                        container.style.height = '180px';
+                    }
+                }
+            });
         });
+        
+        // 加載YouTube API
+        function loadYouTubeAPI() {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        }
+        
+        // 當YouTube API載入完成後會自動調用這個函數
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '100%',
+                width: '100%',
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        // 播放器狀態改變事件
+        function onPlayerStateChange(event) {
+            // 可以添加播放狀態改變的處理邏輯
+        }
+        
+        // 播放視頻
+        function playVideo(videoId, title) {
+            document.getElementById('player-container').style.display = 'block';
+            document.getElementById('now-playing').textContent = title;
+            
+            // 根據當前模式設定播放器高度
+            const container = document.getElementById('player-container');
+            container.style.height = isAudioOnly ? '60px' : '180px';
+            
+            // 如果播放器已初始化
+            if (player && player.loadVideoById) {
+                player.loadVideoById(videoId);
+            } else {
+                // 如果播放器尚未初始化，需要等待API載入
+                window.tempVideoId = videoId;
+                loadYouTubeAPI();
+                
+                // 在API載入後，onYouTubeIframeAPIReady 會自動被調用
+                // 然後我們需要手動加載視頻
+                const checkPlayerInterval = setInterval(function() {
+                    if (player && player.loadVideoById) {
+                        player.loadVideoById(window.tempVideoId);
+                        clearInterval(checkPlayerInterval);
+                    }
+                }, 100);
+            }
+        }
+        
+        // 預載入YouTube API
+        loadYouTubeAPI();
     </script>
-</head>
-<body>
-    <h1>アニソン世代別ビンゴ</h1>
-    <table>
-        <tr>
-            <td class="year-cell">2006</td>
-            <td><a href="https://www.youtube.com/watch?v=WWB01IuMvzA" target="_blank" title="涼宮春日の憂鬱">God knows...</a></td>
-            <td><a href="https://www.youtube.com/watch?v=OYVlx3vnu8I" target="_blank" title="涼宮春日の憂鬱">ハレ晴レユカイ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=FUH9S44D1BM" target="_blank" title="Code Geass 反逆のルルーシュ">COLORS</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ealvplgBdrI" target="_blank" title="BLACK LAGOON">Red fraction</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Lq2-HHP04jM" target="_blank" title="時をかける少女">変わらないもの</a></td>
-            <td><a href="https://www.youtube.com/watch?v=rHwOE8R-gMA" target="_blank" title="銀魂">Pray</a></td>
-            <td><a href="https://www.youtube.com/watch?v=8hhKoCm0H90" target="_blank" title="ひぐらしのなく頃に">ひぐらしのなく頃に</a></td>
-            <td><a href="https://www.youtube.com/watch?v=2RBazTfpybw" target="_blank" title="DEATH NOTE">the WORLD</a></td>
-            <td><a href="https://www.youtube.com/watch?v=jYTegDjxJZs" target="_blank" title="うたわれるもの">夢想花</a></td>
-            <td><a href="https://www.youtube.com/watch?v=AeMRXJtg500" target="_blank" title="映画ドラえもん のび太の恐竜2006">ボクノート</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2007</td>
-            <td><a href="https://www.youtube.com/watch?v=5EXFilTUiko" target="_blank" title="天元突破グレンラガン">空色デイズ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=aTvexNLRwHw" target="_blank" title="ぼくらの">アンインストール</a></td>
-            <td><a href="https://www.youtube.com/watch?v=73O7tATQ8og" target="_blank" title="らき☆すた">もってけ！セーラーふく</a></td>
-            <td><a href="https://www.youtube.com/watch?v=kAImtagQL_I" target="_blank" title="CLANNAD">だんご大家族</a></td>
-            <td><a href="https://www.youtube.com/watch?v=kBQmuw3CYnE" target="_blank" title="銀魂">修羅</a></td>
-            <td><a href="https://www.youtube.com/watch?v=_F5459jCtuM" target="_blank" title="BACCANO！">Guns & Roses</a></td>
-            <td><a href="https://www.youtube.com/watch?v=t5IFVfJwCWo" target="_blank" title="CODE GEASS 反逆のルルーシュ">モザイクカケラ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Uti77M_FG4Q" target="_blank" title="CLANNAD">メグメル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=GAVYCSXAlv0" target="_blank" title="ひぐらしのなく頃に">奈落の底</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Uo5rQnLLoPw" target="_blank" title="ef - a tale of memories">euphoric field</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2008</td>
-            <td><a href="https://www.youtube.com/watch?v=E3wWC6Cfikg" target="_blank" title="CLANNAD AFTER STORY">時を刻む唄</a></td>
-            <td><a href="https://www.youtube.com/watch?v=n5TG3Fxzft0" target="_blank" title="銀魂">曇天</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XPsmi_wbsRs" target="_blank" title="マクロスF">ライオン</a></td>
-            <td><a href="https://www.youtube.com/watch?v=pQ_RaakS6Lc" target="_blank" title="NARUTO -ナルト- 疾風伝">ブルーバード</a></td>
-            <td><a href="https://www.youtube.com/watch?v=tjb0nBaO52o" target="_blank" title="ef - a tale of melodies">ebullient future</a></td>
-            <td><a href="https://www.youtube.com/watch?v=nAi8JIvzcMY" target="_blank" title="CODE GEASS 反逆のルルーシュR2">O2</a></td>
-            <td><a href="https://www.youtube.com/watch?v=-kBmJwloO7Q" target="_blank" title="喰霊">Paradise Lost</a></td>
-            <td><a href="https://www.youtube.com/watch?v=7YlDQpHXZPk" target="_blank" title="true tears">リブラクァイア</a></td>
-            <td><a href="https://www.youtube.com/watch?v=JwnGaYtQnjU" target="_blank" title="とある魔術の禁書目録">PSI-missing</a></td>
-            <td><a href="https://www.youtube.com/watch?v=fazGZtQ5GJg" target="_blank" title="マクロスF">ノーザンクロス</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2009</td>
-            <td><a href="https://www.youtube.com/watch?v=caF6nJxTejc" target="_blank" title="化物語">君の知らない物語</a></td>
-            <td><a href="https://www.youtube.com/watch?v=q_sQUK418mM" target="_blank" title="とある科学の超電磁砲">only my railgun</a></td>
-            <td><a href="https://www.youtube.com/watch?v=uKxyLmbOc0Q" target="_blank" title="化物語">恋愛サーキュレーション</a></td>
-            <td><a href="https://www.youtube.com/watch?v=5CSNv9MNEC4" target="_blank" title="K-ON!">Don't say "lazy"</a></td>
-            <td><a href="https://www.youtube.com/watch?v=2gcH3DTeVf0" target="_blank" title="獣の奏者エリン">雫</a></td>
-            <td><a href="https://www.youtube.com/watch?v=s2bECQLBPdg" target="_blank" title="とらドラ！">オレンジ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=I0xRbWqIohQ" target="_blank" title="K-ON!">ふわふわ時間</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ePVJdev77Gw" target="_blank" title="WHITE ALBUM">深愛</a></td>
-            <td><a href="https://www.youtube.com/watch?v=B7uMdmCQabc" target="_blank" title="鋼の錬金術師 BROTHERHOOD">again</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ua02dloykJ4" target="_blank" title="けいおん！">Cagayake! GIRLS</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2010</td>
-            <td><a href="https://www.youtube.com/watch?v=tm7Xf9818FM" target="_blank" title="Angel Beats!">一番の宝物</a></td>
-            <td><a href="https://www.youtube.com/watch?v=dUrohpo5BJs" target="_blank" title="緣之空">比翼の羽根</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ba0juE9ROCg" target="_blank" title="K-ON!!">天使にふれたよ!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=W4YbIxlfw8k" target="_blank" title="とある科学の超電磁砲">LEVEL5 -judgelight-</a></td>
-            <td><a href="https://www.youtube.com/watch?v=5r0jdlfqeE4" target="_blank" title="DURARARA!!">裏切りの夕焼け</a></td>
-            <td><a href="https://www.youtube.com/watch?v=QIU044tsV2Q" target="_blank" title="とある魔術の禁書目録II">No buts!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XfjOSXQm5Eo" target="_blank" title="俺の妹がこんなに可愛いわけがない">irony</a></td>
-            <td><a href="https://www.youtube.com/watch?v=zIFV8UUs1-c" target="_blank" title="Angel Beats!">My Soul, Your Beats!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Kecl-SomNwg" target="_blank" title="K-ON!!">GO!GO! MANIAC</a></td>
-            <td><a href="https://www.youtube.com/watch?v=VXbXgblVh5Y" target="_blank" title="刀語">拍手喝采</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2011</td>
-            <td><a href="https://www.youtube.com/watch?v=7EuTPTVpuNI" target="_blank" title="魔法少女まどか☆マギカ">コネクト</a></td>
-            <td><a href="https://www.youtube.com/watch?v=GJ4yehnerHQ" target="_blank" title="Fate/Zero">oath sign</a></td>
-            <td><a href="https://www.youtube.com/watch?v=KpM6xNAgRoI" target="_blank" title="銀魂">サムライハート</a></td>
-            <td><a href="https://www.youtube.com/watch?v=nIrYjzHAEp0" target="_blank" title="ギルティクラウン">My Dearest</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ZGM90Bo3zH0" target="_blank" title="STEINS;GATE">Hacking to the Gate</a></td>
-            <td><a href="https://www.youtube.com/watch?v=fRQtDjiRtI8" target="_blank" title="あの日見た花の名前を僕達はまだ知らない。">secret base 〜君がくれたもの〜</a></td>
-            <td><a href="https://www.youtube.com/watch?v=LkpSfuHDMTg" target="_blank" title="銀魂">桃源郷エイリアン</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Lw5o2pSrVbQ" target="_blank" title="TIGER & BUNNY">オリオンをなぞる</a></td>
-            <td><a href="https://www.youtube.com/watch?v=pQyjzmB_YeU" target="_blank" title="ギルティクラウン">Departures ~あなたにおくるアイの歌~</a></td>
-            <td><a href="https://www.youtube.com/watch?v=7tLzZ3H5uJU" target="_blank" title="うたの☆プリンスさまっ♪">マジLOVE1000%</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2012</td>
-            <td><a href="https://www.youtube.com/watch?v=qiX5DI--8bg" target="_blank" title="PSYCHO-PASS サイコパス">名前のない怪物</a></td>
-            <td><a href="https://www.youtube.com/watch?v=-p0IjnBhG10" target="_blank" title="ギルティクラウン">The Everlasting Guilty Crown</a></td>
-            <td><a href="https://www.youtube.com/watch?v=RpqqaNJuopc" target="_blank" title="氷菓">優しさの理由</a></td>
-            <td><a href="https://www.youtube.com/watch?v=h7Oi2h-vKFI" target="_blank" title="ソードアート・オンライン">crossing field</a></td>
-            <td><a href="https://www.youtube.com/watch?v=IIwp6Nafry0" target="_blank" title="中二病でも恋がしたい！">Sparkling Daydream</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Lcb7Za77lfw" target="_blank" title="這いよれ! ニャル子さん">太陽曰く燃えよカオス</a></td>
-            <td><a href="https://www.youtube.com/watch?v=14FOPsSCIPs" target="_blank" title="偽物語">白金ディスコ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=2o00UFfyIfQ" target="_blank" title="Little Busters!">Little Busters!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=cHN2mdIwB8M" target="_blank" title="偽物語">ナイショの話</a></td>
-            <td><a href="https://www.youtube.com/watch?v=IPMxMR1vAVE" target="_blank" title="BTOOOM!">No pain, No game</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2013</td>
-            <td><a href="https://www.youtube.com/watch?v=NOt2qxWtBv0" target="_blank" title="とある科学の超電磁砲S">sister's noise</a></td>
-            <td><a href="https://www.youtube.com/watch?v=qDE4pm6yiHM" target="_blank" title="ソードアート・オンライン">ユキトキ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=aEHxqBHCkFc" target="_blank" title="這いよれ! ニャル子さん W">恋は渾沌の隷也</a></td>
-            <td><a href="https://www.youtube.com/watch?v=WPKiiYqp4Vc" target="_blank" title="機巧少女は傷つかない">回レ! 雪月花</a></td>
-            <td><a href="https://www.youtube.com/watch?v=8RGI7JhWOCs" target="_blank" title="進撃の巨人">紅蓮の弓矢</a></td>
-            <td><a href="https://www.youtube.com/watch?v=AtFpPAVAy8k" target="_blank" title="たまこまーけっと">カラフル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=9sEA0jgMzas" target="_blank" title="境界の彼方">境界の彼方</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Mi9uNu35Gmk" target="_blank" title="映画クレヨンしんちゃん　バカうまっ！B級グルメサバイバル！！">RPG</a></td>
-            <td><a href="https://www.youtube.com/watch?v=8nr4pKmGsbM" target="_blank" title="ラブライブ！">START:DASH!!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=D2uqpqrYmMY" target="_blank" title="蒼き鋼のアルペジオ">SAVIOR OF SONG</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2014</td>
-            <td><a href="https://www.youtube.com/watch?v=FghoeusbkUk" target="_blank" title="ノーゲーム・ノーライフ">This game</a></td>
-            <td><a href="https://www.youtube.com/watch?v=uMeR2W19wT0" target="_blank" title="東京喰種">unravel</a></td>
-            <td><a href="https://www.youtube.com/watch?v=dix-lB_muio" target="_blank" title="ラブライブ！">Snow halation</a></td>
-            <td><a href="https://www.youtube.com/watch?v=QizqLqGLork" target="_blank" title="ソードアート・オンライン">courage</a></td>
-            <td><a href="https://www.youtube.com/watch?v=SnXkhkEvNIM" target="_blank" title="四月は君の嘘">光るなら</a></td>
-            <td><a href="https://www.youtube.com/watch?v=IzhMzY5avLI" target="_blank" title="魔法科高校の劣等生">Rising Hope</a></td>
-            <td><a href="https://www.youtube.com/watch?v=y6FCQWlKeJQ" target="_blank" title="ソードアート・オンライン">シルシ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=4faD6XrGoVY" target="_blank" title="ご注文はうさぎですか？">Daydream cafe</a></td>
-            <td><a href="https://www.youtube.com/watch?v=zVgKnfN9i34" target="_blank" title="NARUTO -ナルト- 疾風伝">シルエット</a></td>
-            <td><a href="https://www.youtube.com/watch?v=i1qrQWyuM3U" target="_blank" title="月刊少女野崎くん">君じゃなきゃダメみたい</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2015</td>
-            <td><a href="https://www.youtube.com/watch?v=JpCyeo_kNA0" target="_blank" title="血界戦線">シュガーソングとビターステップ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=qs679fajel0" target="_blank" title="やはり俺の青春ラブコメはまちがっている。続">春擬き</a></td>
-            <td><a href="https://www.youtube.com/watch?v=EYiNo2kLAHw" target="_blank" title="銀魂°">プライド革命</a></td>
-            <td><a href="https://www.youtube.com/watch?v=1bC5CNDk_mw" target="_blank" title="ラブライブ！">僕たちはひとつの光</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XeI8E20ZUE4" target="_blank" title="Fate/stay night [Unlimited Blade Works]">Brave Shine</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ZGGwnnz0f-I" target="_blank" title="艦隊これくしょん -艦これ-">吹雪</a></td>
-            <td><a href="https://www.youtube.com/watch?v=C-o8pTi6vd8" target="_blank" title="ノラガミ ARAGOTO">狂乱Hey Kids!!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ImafuPUbb30" target="_blank" title="山田くんと7人の魔女">くちづけDiamond</a></td>
-            <td><a href="https://www.youtube.com/watch?v=acVHCpzUCq8" target="_blank" title="Charlotte">Bravely you</a></td>
-            <td><a href="https://www.youtube.com/watch?v=VS82jSg05O4" target="_blank" title="艦隊これくしょん -艦これ-">海色</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2016</td>
-            <td><a href="https://www.youtube.com/watch?v=2ctTxnkRbIo" target="_blank" title="Re:ゼロから始める異世界生活">Redo</a></td>
-            <td><a href="https://www.youtube.com/watch?v=oRAF2-Exzx4" target="_blank" title="ハイキュー!! セカンドシーズン">ヒカリアレ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=PDSkFeMVNFs" target="_blank" title="君の名は。">前前前世</a></td>
-            <td><a href="https://www.youtube.com/watch?v=bN1t3-2X3aM" target="_blank" title="夏目友人帳">茜さす</a></td>
-            <td><a href="https://www.youtube.com/watch?v=nPJhLiqv8Jc" target="_blank" title="この素晴らしい世界に祝福を！">fantastic dreamer</a></td>
-            <td><a href="https://www.youtube.com/watch?v=yPWCFWKAgRA" target="_blank" title="はいふり">High Free Spirits</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Y9JPLPJLrlk" target="_blank" title="暗殺教室第2期">バイバイYESTERDAY</a></td>
-            <td><a href="https://www.youtube.com/watch?v=-77UEct0cZM" target="_blank" title="僕のヒーローアカデミア">THE DAY</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Yc8pu8TC7IM" target="_blank" title="Re:ゼロから始める異世界生活">Paradisus-Paradoxum</a></td>
-            <td><a href="https://www.youtube.com/watch?v=d8wBMkvtRaI" target="_blank" title="僕だけがいない街">Re:Re:</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2017</td>
-            <td><a href="https://www.youtube.com/watch?v=9aJVr5tTTWk" target="_blank" title="僕のヒーローアカデミア第2期">ピースサイン</a></td>
-            <td><a href="https://www.youtube.com/watch?v=GC1igLEsa8I" target="_blank" title="劇場版 ソードアート・オンライン -オーディナル・スケール-">Catch the Moment</a></td>
-            <td><a href="https://www.youtube.com/watch?v=maKok2RItxM" target="_blank" title="小林さんちのメイドラゴン">青空のラプソディ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=OgXZn_H_QAI" target="_blank" title="幼女戦記">Los! Los! Los!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=xkMdLcB_vNU" target="_blank" title="けものフレンズ">ようこそジャパリパークへ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=lOGwN-W1fpM" target="_blank" title="ようこそ実力至上主義の教室へ">カーストルーム</a></td>
-            <td><a href="https://www.youtube.com/watch?v=PHVteOCVAbk" target="_blank" title="結城友奈は勇者である 鷲尾須美の章">エガオノキミへ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=fHD4nFHjTOc" target="_blank" title="ラブライブ！サンシャイン!!">WATER BLUE NEW WORLD</a></td>
-            <td><a href="https://www.youtube.com/watch?v=wrpRv1pyV6I" target="_blank" title="ノーゲーム・ノーライフ ゼロ">THERE IS A REASON</a></td>
-            <td><a href="https://www.youtube.com/watch?v=gzbPx7Jvd68" target="_blank" title="エロマンガ先生">ヒトリゴト</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2018</td>
-            <td><a href="https://www.youtube.com/watch?v=MMuAqR_MjS8" target="_blank" title="ソードアート・オンライン アリシゼーション">ADAMAS</a></td>
-            <td><a href="https://www.youtube.com/watch?v=MbGj3zV3X8I" target="_blank" title="青春ブタ野郎はバニーガール先輩の夢を見ない">君のせい</a></td>
-            <td><a href="https://www.youtube.com/watch?v=3QvZYI00voE" target="_blank" title="ハッピーシュガーライフ">ワンルームシュガーライフ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=P1cyCAUTWVg" target="_blank" title="やがて君になる">Love with you</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XjHqfhOcK_0" target="_blank" title="ヲタクに恋は難しい">フィクション</a></td>
-            <td><a href="https://www.youtube.com/watch?v=aFe3srrhLdI" target="_blank" title="はたらく細胞">ミッション！健・康・第・イチ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=WHcHbyUmpL0" target="_blank" title="色づく世界の明日から">17才</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Pn4zz6ZdEU0" target="_blank" title="ソードアート・オンライン アリシゼーション">Iris(アイリス)</a></td>
-            <td><a href="https://www.youtube.com/watch?v=b4CIYS1Bme4" target="_blank" title="SSSS.GRIDMAN">UNION</a></td>
-            <td><a href="https://www.youtube.com/watch?v=_EQ70Yr_2nc" target="_blank" title="殺戮の天使">Pray</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2019</td>
-            <td><a href="https://www.youtube.com/watch?v=4DxL6IKmXx4" target="_blank" title="鬼滅の刃">紅蓮華</a></td>
-            <td><a href="https://www.youtube.com/watch?v=wfCcs0vLysk" target="_blank" title="炎炎ノ消防隊">インフェルノ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=2pECnr5MNuU" target="_blank" title="ダンベル何キロ持てる？">お願いマッスル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=3KGjAw0fGX0" target="_blank" title="Fate/Grand Order -絶対魔獣戦線バビロニア-">Phantom Joke</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XtqGr-km0XQ" target="_blank" title="ソードアート・オンライン アリシゼーション">unlasting</a></td>
-            <td><a href="https://www.youtube.com/watch?v=f0veKLMX1oA" target="_blank" title="五等分の花嫁">五等分の気持ち</a></td>
-            <td><a href="https://www.youtube.com/watch?v=A8XXGzbs48A" target="_blank" title="可愛ければ変態でも好きになってくれますか？">ダイスキ。</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Isb7Q4jEA04" target="_blank" title="僕のヒーローアカデミア第4期">ポラリス</a></td>
-            <td><a href="https://www.youtube.com/watch?v=WvMcbMh3kI0" target="_blank" title="女子高生の無駄づかい">輪！Moon! dass! cry!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=oXTaVsGY_NI" target="_blank" title="俺を好きなのはお前だけかよ">パパパ</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2020</td>
-            <td><a href="https://www.youtube.com/watch?v=r-4XumkB2Yg" target="_blank" title="SAO アリシゼーション War of Underworld">ANIMA</a></td>
-            <td><a href="https://www.youtube.com/watch?v=1tk1pqwrOys" target="_blank" title="呪術廻戦">廻廻奇譚</a></td>
-            <td><a href="https://www.youtube.com/watch?v=4DxL6IKmXx4" target="_blank" title="鬼滅の刃">炎</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ta47cixWBp8" target="_blank" title="神様になった日">君という神話</a></td>
-            <td><a href="https://www.youtube.com/watch?v=R33q3f7Xpiw" target="_blank" title="とある科学の超電磁砲T">final phase</a></td>
-            <td><a href="https://www.youtube.com/watch?v=j3fczXHUvPQ" target="_blank" title="やはり俺の青春ラブコメはまちがっている。完">芽ぐみの雨</a></td>
-            <td><a href="https://www.youtube.com/watch?v=uaRnwnmqrws" target="_blank" title="Re:ゼロから始める異世界生活">Realize</a></td>
-            <td><a href="https://www.youtube.com/watch?v=DzQ7s2KkbCk" target="_blank" title="彼女、お借りします">センチメートル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ekP7VLeXnqY" target="_blank" title="Fate/stay night [Heaven's Feel]">春はゆく</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Ui-KKFZKIq4" target="_blank" title="魔王城でおやすみ">快眠！安眠！スヤリスト生活</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2021</td>
-            <td><a href="https://www.youtube.com/watch?v=6zQ0myS_o60" target="_blank" title="ウマ娘">ユメヲカケル！</a></td>
-            <td><a href="https://www.youtube.com/watch?v=XCs7FacjHQY" target="_blank" title="小林さんちのメイドラゴンＳ">愛のシュプリーム!</a></td>
-            <td><a href="https://www.youtube.com/watch?v=2p8ig-TrYPY" target="_blank" title="ヴィヴィ -フローライトアイズソング-">Sing My Pleasure</a></td>
-            <td><a href="https://www.youtube.com/watch?v=T9KcagzYZUY" target="_blank" title="劇場版ソードアート・オンライン -プログレッシブ- 星なき夜のアリア">往け</a></td>
-            <td><a href="https://www.youtube.com/watch?v=AXtfzKaKr4I" target="_blank" title="先輩がうざい後輩の話">アノーイング！さんさんウィーク！</a></td>
-            <td><a href="https://www.youtube.com/watch?v=O1bhZgkC4Gw" target="_blank" title="東京リベンジャーズ">Cry Baby</a></td>
-            <td><a href="https://www.youtube.com/watch?v=xfG6L9I7N8I" target="_blank" title="機動戦士ガンダム 閃光のハサウェイ">閃光</a></td>
-            <td><a href="https://www.youtube.com/watch?v=f_RtcheIvcg" target="_blank" title="takt op.Destiny">タクト</a></td>
-            <td><a href="https://www.youtube.com/watch?v=M8LwhRkNaSQ" target="_blank" title="シャドーハウス">ないない</a></td>
-            <td><a href="https://www.youtube.com/watch?v=CL8ihD3rPC4" target="_blank" title="世界最高の暗殺者、異世界貴族に転生する">Dark seeks light</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2022</td>
-            <td><a href="https://www.youtube.com/watch?v=Rwzy6Qt8gq8" target="_blank" title="リコリス・リコイル">花の塔</a></td>
-            <td><a href="https://www.youtube.com/watch?v=Yd8kUoB72xU" target="_blank" title="ぼっち・ざ・ろっく！">青春コンプレックス</a></td>
-            <td><a href="https://www.youtube.com/watch?v=M2cckDmNLMI" target="_blank" title="チェンソーマン">KICK BACK</a></td>
-            <td><a href="https://www.youtube.com/watch?v=3eytpBOkOFA" target="_blank" title="機動戦士ガンダム水星の魔女">祝福</a></td>
-            <td><a href="https://www.youtube.com/watch?v=CbH2F0kXgTY" target="_blank" title="SPY×FAMILY">ミックスナッツ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=1FliVTcX8bQ" target="_blank" title="ONE PIECE FILM RED">新時代</a></td>
-            <td><a href="https://www.youtube.com/watch?v=NNDS_UyHzvk" target="_blank" title="明日ちゃんのセーラー服">はじまりのセツナ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=AwXRPWmgLbU" target="_blank" title="よふかしのうた">堕天</a></td>
-            <td><a href="https://www.youtube.com/watch?v=wSTbdqo-j74" target="_blank" title="ぼっち・ざ・ろっく！">星座になるまで</a></td>
-            <td><a href="https://www.youtube.com/watch?v=f0veKLMX1oA" target="_blank" title="映画「五等分の花嫁」">五等分の花嫁～ありがとうの花～</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2023</td>
-            <td><a href="https://www.youtube.com/watch?v=ZRtdQ81jPUQ" target="_blank" title="【推しの子】">アイドル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=OIBODIPC_8Y" target="_blank" title="葬送のフリーレン">勇者</a></td>
-            <td><a href="https://www.youtube.com/watch?v=gcgKUcJKxIs" target="_blank" title="呪術廻戦">青のすみか</a></td>
-            <td><a href="https://www.youtube.com/watch?v=f5Rml_Jol8o" target="_blank" title="転生王女と天才令嬢の魔法革命">アルカンシェル</a></td>
-            <td><a href="https://www.youtube.com/watch?v=fE9trKOuT3Q" target="_blank" title="無職転生">spiral</a></td>
-            <td><a href="https://www.youtube.com/watch?v=v-WcMQbXbKY" target="_blank" title="薬屋のひとりごと">花になって</a></td>
-            <td><a href="https://www.youtube.com/watch?v=0saw1cGIl1A" target="_blank" title="【推しの子】">メフィスト</a></td>
-            <td><a href="https://www.youtube.com/watch?v=cHcMHceZEuk" target="_blank" title="お兄ちゃんはおしまい！">アイデン貞貞メルトダウン</a></td>
-            <td><a href="https://www.youtube.com/watch?v=fhzKLBZJC3w" target="_blank" title="呪術廻戦">SPECIALZ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=hfnZBzuVKX0" target="_blank" title="スキップとローファー">メロウ</a></td>
-        </tr>
-        <tr>
-            <td class="year-cell">2024</td>
-            <td><a href="https://www.youtube.com/watch?v=8tQiWHXSGN0" target="_blank" title="【推しの子】">ファタール</a></td>
-            <td><a href="https://www.youtube.com/watch?v=A7cp6OVa0Qc" target="_blank" title="アオのハコ">Same Blue</a></td>
-            <td><a href="https://www.youtube.com/watch?v=MSmfAa_oSqE" target="_blank" title="ガールズバンドクライ">雑踏、僕らの街</a></td>
-            <td><a href="https://www.youtube.com/watch?v=A0tKGpKOU4Y" target="_blank" title="僕の心のヤバイやつ第2期">「僕は…」</a></td>
-            <td><a href="https://www.youtube.com/watch?v=7GJOBkIgWHc" target="_blank" title="負けヒロインが多すぎる">つよがる​ガール</a></td>
-            <td><a href="https://www.youtube.com/watch?v=QjrkrVmC-8M" target="_blank" title="忘却バッテリー">ライラック</a></td>
-            <td><a href="https://www.youtube.com/watch?v=tRwHpyOq4P4" target="_blank" title="ダンダダン">オトノケ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=ZZvIVRQ4E7I" target="_blank" title="しかのこのこのここしたんたん">シカ色デイズ</a></td>
-            <td><a href="https://www.youtube.com/watch?v=9E_gqQ7V5P0" target="_blank" title="僕のヒーローアカデミア">カーテンコール</a></td>
-            <td><a href="https://www.youtube.com/watch?v=1ns78jyf0fw" target="_blank" title="響け！ユーフォニアム３">ReCoda</a></td>
-        </tr>
-    </table>
 </body>
 </html>
