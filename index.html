@@ -6,6 +6,24 @@
     <title>アニソン世代別ビンゴ</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px; /* ✅ 縮小內距，讓手機更好閱讀 */
+            }
+
+            table {
+                overflow-x: auto; /* ✅ 讓手機可滑動表格 */
+                width: 100%; /* ✅ 確保表格不超出容器 */
+                table-layout: fixed; /* ✅ 讓欄位大小統一，避免變形 */
+            }
+
+            th, td {
+                padding: 6px; /* ✅ 再縮小一點內距，避免表格過大 */
+                font-size: 12px; /* ✅ 手機上使用較小字體，提升可讀性 */
+                white-space: normal; /* ✅ 允許文字換行，避免超出螢幕 */
+            }
+        }
+
         body {
             font-family: 'Noto Sans JP', Arial, sans-serif;
             line-height: 1.6;
@@ -17,6 +35,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: auto; /* ✅ 確保表格可以橫向滑動 */
             background-color: white;
             padding: 20px;
             border-radius: 8px;
@@ -31,9 +50,10 @@
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            max-width: 100%;
             margin-top: 20px;
-            table-layout: fixed; /* ✅ 固定欄位大小 */
+            border-collapse: collapse;
+            table-layout: auto; /* ✅ 讓欄位寬度隨內容變動 */
         }
         th, td {
             padding: 12px 15px;
