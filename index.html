@@ -169,7 +169,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="bingo-container">
         <h1>アニソン世代別ビンゴ</h1>
         <table>
             <tr>
@@ -420,6 +420,9 @@
                 <td><a href="#" data-youtube-id="1ns78jyf0fw" target="_blank" title="響け！ユーフォニアム３">ReCoda</a></td>
             </tr>
         </table>
+        <div class="btn-container">
+            <button class="btn" onclick="captureBingo()">下載圖像</button>
+        </div>
     </div>
     
     <!-- YouTube播放器容器 -->
@@ -441,7 +444,7 @@
         // 圈圈標記功能
         document.addEventListener('DOMContentLoaded', function() {
             // 獲取所有表格單元格
-            const cells = document.querySelectorAll('td');
+            const cells = document.querySelectorAll('td:has(a)');
             
             // 為每個單元格添加點擊事件
             cells.forEach(cell => {
@@ -559,6 +562,18 @@
         
         // 預載入YouTube API
         loadYouTubeAPI();
+
+        function captureBingo() {
+            console.log(typeof html2canvas);
+            html2canvas(document.getElementById("bingo-container")).then(canvas => {
+                let link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = "bingo.png";
+                link.click();
+            });
+            console.log(canvas.toDataURL())
+        }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
